@@ -37,7 +37,7 @@ def reply_handler(update ,bot):
         pass
 def search_image(q):
     payload = {
-        'key' :  'AIzaSyCvC61kVRE8V-Q8If3NwEBzRxcF3vzOt4U',
+        'key' : config['GOOGLE']['KEY'] ,
         'cx' : "84d6a80a82edac1ae",
         'searchType': 'image',
         'num' : 10,
