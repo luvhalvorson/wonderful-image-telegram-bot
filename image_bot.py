@@ -4,7 +4,7 @@ import telegram
 from telegram.ext import Dispatcher, MessageHandler, Filters
 import random
 import configparser
-
+import re
 
 config = configparser.ConfigParser()
 config.read("config.ini")
@@ -25,9 +25,9 @@ def reply_handler(update ,bot):
     """Reply message."""
     try:
         text = update.message.text
-        if text.endswith('.jpg') or text.endswith('.png') or text.endswith('.gif'):
-            url = search_image(text)
-            if not text.endswith('.gif'):
+        if matched := re.search(r'[\S]+\.(jpg|png|gif)', text):
+            url = search_image(matched.group(0))
+            if not matched.group(1) == 'gif':
                 update.message.reply_photo(url)
             else:
                 update.message.reply_document(url)
